@@ -11,5 +11,17 @@ echOpen GUI software lab tool to test and develop signal processing algorithms.
 - Clément (@clecoued)
 
 ## Architecture (coming soon...)
+The architecture of this software is described in figure below, it is composed of 7 principal modules:
+
+- Connexion management: module that checks the connexion between the probe and the display software.
+- Settings management: module that manages the settings between the probe and the display module.
+- Feedback: module that manages the feedback from the probe.
+- Data streaming reception: module that receives the data from the probe sends it the the signal processing module.
+- Signal processing: module that applies the signal processing to each measurement line and sends it to image processing module.
+- Image processing: module that determines the image.
+- Image display: main window of the software where the image is displayed.
+- The black lines represent the flux of the data from the probe to the displayed image. The gray lines represent the flux of settings and some informations such as feedback from the probe.
+
+![architecture](img/archi.png)
 
 ## Installing (coming soon...) 
