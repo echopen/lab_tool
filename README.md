@@ -9,4 +9,6 @@ echOpen GUI software lab tool to test and develop signal processing algorithms.
 - Jérôme (@GG23800)
 - Clément (@clecoued)
 
+## Architecture (coming soon...)
+
 ## Installing (coming soon...) 
