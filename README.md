@@ -1,10 +1,15 @@
 # echOpen lab tool
-echOpen GUI software lab tool to test and develop signal processing algorithms. 
+echOpen GUI software lab tool to test and develop signal processing algorithms.
 
 ## To start
 ### info
 - Software tool [design brief](https://github.com/echopen/lab_tool/blob/master/DB_laboratory_tool_v2_en.pdf)
 - Joining the team on echOpen slack [lab tool dedicated channel](https://echopen.slack.com/messages/CCGEF6CQY/)
+
+### Note to contributors
+- All contributors accept to send its contribution regarding the BSD-3 licence of the lab tool (see the licence in the repository)
+- All contributors will develop and send code in the respect of the licence and not using any library without compliant licence
+- All contributors will send its contribution through pull request
 
 ### Contact (lead dev)
 - Jérôme (@GG23800)
@@ -24,4 +29,4 @@ The architecture of this software is described in figure below, it is composed o
 
 ![architecture](img/archi.png)
 
-## Installing (coming soon...) 
+## Installing (coming soon...)
