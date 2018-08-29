@@ -10,7 +10,7 @@ echOpen GUI software lab tool to test and develop signal processing algorithms.
 - Jérôme (@GG23800)
 - Clément (@clecoued)
 
-## Architecture (coming soon...)
+## Architecture
 The architecture of this software is described in figure below, it is composed of 7 principal modules:
 
 - Connexion management: module that checks the connexion between the probe and the display software.
