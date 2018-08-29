@@ -27,6 +27,6 @@ The architecture of this software is described in figure below, it is composed o
 - Image display: main window of the software where the image is displayed.
 - The black lines represent the flux of the data from the probe to the displayed image. The gray lines represent the flux of settings and some informations such as feedback from the probe.
 
-![architecture](img/archi.png)
+![architecture scheme](img/archi.png)
 
 ## Installing (coming soon...)
