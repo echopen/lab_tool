@@ -29,6 +29,8 @@ The architecture of this software is described in figure below, it is composed o
 
 ![architecture scheme](img/archi.png)
 
-## Installing (coming soon...)
+## Installing
 
 First compile the probe emulator (./probe_emulator), see the [readme](./probe_emulator/readme.md) and launch it (use film option to have different image sends by the emulator, the other options will leads to loop on an unique image). The emulator can be stop with CTRL-C.
+
+A first simple code can be found in the [RAW_tool](./RAW_tool) folder. This software connects to the probe emulator, receives an image, determine the envelope of each line and makes the scan conversion. The result is saved in a txt file.
