@@ -31,4 +31,4 @@ The architecture of this software is described in figure below, it is composed o
 
 ## Installing (coming soon...)
 
-First compile the probe emulator, see the [readme](./probe_emulator/readme.md) and launch it (use film option to have different image sends by the emulator, the other options will leads to loop on an unique image). The emulator can be stop with CTRL-C.
+First compile the probe emulator (./probe_emulator), see the [readme](./probe_emulator/readme.md) and launch it (use film option to have different image sends by the emulator, the other options will leads to loop on an unique image). The emulator can be stop with CTRL-C.
