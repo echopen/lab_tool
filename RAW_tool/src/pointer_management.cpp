@@ -1,5 +1,6 @@
 /*----
-Contributor: Jérôme Dubois
+Author: Jérôme Dubois
+Contributors:
 Version: 1.1
 Date: 07/2018
 Descritption:
@@ -15,90 +16,16 @@ delete_vector_int(&vec);
 
 successfully pass varied valgrind tests
 ----*/
-
-#ifndef POINTER_MANAGEMENT_H
-#define POINTER_MANAGEMENT_H
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdint.h> //int16_t etc
 #include<complex.h>
 
-//complex typedef
-typedef double complex cplxd;
-typedef float complex cplxf;
-
-// char vector management
-void create_vector_char (char **data_vec, int N_data);
-void create_0_vector_char (char **data_vec, int N_data);
-void resize_vector_char (char **data_vec, int N_data);
-void delete_vector_char (char **data_vec);
-// char matrix management
-void create_matrix_char (char ***data_mat, int Nx_data, int Ny_data);
-void create_0_matrix_char (char ***data_mat, int Nx_data, int Ny_data);
-void resize_matrix_char (char ***data_mat, int Nx_data, int Ny_data, int Nx_old_data, int Ny_old_data);
-void delete_matrix_char (char ***data_mat, int Nx_data, int Ny_data);
-
-// int vector management
-void create_vector_int (int **data_vec, int N_data);
-void create_0_vector_int (int **data_vec, int N_data);
-void resize_vector_int (int **data_vec, int N_data);
-void delete_vector_int (int **data_vec);
-// int matrix management
-void create_matrix_int (int ***data_mat, int Nx_data, int Ny_data);
-void create_0_matrix_int (int ***data_mat, int Nx_data, int Ny_data);
-void resize_matrix_int (int ***data_mat, int Nx_data, int Ny_data, int Nx_old_data, int Ny_old_data);
-void delete_matrix_int (int ***data_mat, int Nx_data, int Ny_data);
-
-// int16_t vector management
-void create_vector_int16_t (int16_t **data_vec, int N_data);
-void create_0_vector_int16_t (int16_t **data_vec, int N_data);
-void resize_vector_int16_t (int16_t **data_vec, int N_data);
-// int matrix management
-void delete_vector_int16_t (int16_t **data_vec);
-void create_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data);
-void create_0_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data);
-void resize_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data, int Nx_old_data, int Ny_old_data);
-void delete_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data);
-
-// float vector management
-void create_vector_float (float **data_vec, int N_data);
-void create_0_vector_float (float **data_vec, int N_data);
-void resize_vector_float (float **data_vec, int N_data);
-void delete_vector_float (float **data_vec);
-// float matrix management
-void create_matrix_float (float ***data_mat, int Nx_data, int Ny_data);
-void create_0_matrix_float (float ***data_mat, int Nx_data, int Ny_data);
-void resize_matrix_float (float ***data_mat, int Nx_data, int Ny_data, int Nx_old_data, int Ny_old_data);
-void delete_matrix_float (float ***data_mat, int Nx_data, int Ny_data);
-
-// double vector management
-void create_vector_double (double **data_vec, int N_data);
-void create_0_vector_double (double **data_vec, int N_data);
-void resize_vector_double (double **data_vec, int N_data);
-void delete_vector_double (double **data_vec);
-// float matrix management
-void create_matrix_double (double ***data_mat, int Nx_data, int Ny_data);
-void create_0_matrix_double (double ***data_mat, int Nx_data, int Ny_data);
-void resize_matrix_double (double ***data_mat, int Nx_data, int Ny_data, int Nx_old_data, int Ny_old_data);
-void delete_matrix_double (double ***data_mat, int Nx_data, int Ny_data);
-
-// complex float vector management
-void create_vector_cplxf (cplxf **data_vec, int N_data);
-void create_0_vector_cplxf (cplxf **data_vec, int N_data);
-void resize_vector_cplxf (cplxf **data_vec, int N_data);
-void delete_vector_cplxf (cplxf **data_vec);
-
-// complex double vector management
-void create_vector_cplxd (cplxd **data_vec, int N_data);
-void create_0_vector_cplxd (cplxd **data_vec, int N_data);
-void resize_vector_cplxd (cplxd **data_vec, int N_data);
-void delete_vector_cplxd (cplxd **data_vec);
-
+#include"pointer_management.hpp"
 
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-//int vector management
+//char vector management
 void create_vector_char (char **data_vec, int N_data)
 {
   *data_vec=(char *)malloc(N_data*sizeof(char));
@@ -254,7 +181,7 @@ void resize_matrix_char (char ***data_mat, int Nx_data, int Ny_data, int Nx_old_
   }
 }
 
-void delete_matrix_char (char ***data_mat, int Nx_data, int Ny_data)
+void delete_matrix_char (char ***data_mat, int Nx_data)
 {
   int i=0;
   char **tmp=*data_mat;
@@ -428,7 +355,7 @@ void resize_matrix_int (int ***data_mat, int Nx_data, int Ny_data, int Nx_old_da
   }
 }
 
-void delete_matrix_int (int ***data_mat, int Nx_data, int Ny_data)
+void delete_matrix_int (int ***data_mat, int Nx_data)
 {
   int i=0;
   int **tmp=*data_mat;
@@ -602,7 +529,7 @@ void resize_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data, int N
   }
 }
 
-void delete_matrix_int16_t (int16_t ***data_mat, int Nx_data, int Ny_data)
+void delete_matrix_int16_t (int16_t ***data_mat, int Nx_data)
 {
   int i=0;
   int16_t **tmp=*data_mat;
@@ -774,7 +701,7 @@ void resize_matrix_float (float ***data_mat, int Nx_data, int Ny_data, int Nx_ol
   }
 }
 
-void delete_matrix_float (float ***data_mat, int Nx_data, int Ny_data)
+void delete_matrix_float (float ***data_mat, int Nx_data)
 {
   int i=0;
   float **tmp=*data_mat;
@@ -946,7 +873,7 @@ void resize_matrix_double (double ***data_mat, int Nx_data, int Ny_data, int Nx_
   }
 }
 
-void delete_matrix_double (double ***data_mat, int Nx_data, int Ny_data)
+void delete_matrix_double (double ***data_mat, int Nx_data)
 {
   int i=0;
   double **tmp=*data_mat;
@@ -1064,5 +991,3 @@ void delete_vector_cplxd (cplxd **data_vec)
     *data_vec=NULL;
   }
 }
-
-#endif

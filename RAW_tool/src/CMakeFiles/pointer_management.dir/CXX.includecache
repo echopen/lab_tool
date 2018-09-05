@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/pointer_management.cpp
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+complex.h
+-
+pointer_management.hpp
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/pointer_management.hpp
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/pointer_management.hpp
+

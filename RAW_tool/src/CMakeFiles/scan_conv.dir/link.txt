@@ -1,0 +1,2 @@
+/usr/bin/ar qc libscan_conv.a  CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.o
+/usr/bin/ranlib libscan_conv.a

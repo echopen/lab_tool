@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpointer_management.a  CMakeFiles/pointer_management.dir/pointer_management.cpp.o
+/usr/bin/ranlib libpointer_management.a

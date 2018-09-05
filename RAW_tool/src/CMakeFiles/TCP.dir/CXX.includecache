@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/TCP_API.cpp
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+sys/socket.h
+-
+sys/types.h
+-
+arpa/inet.h
+-
+errno.h
+-
+unistd.h
+-
+netdb.h
+-
+pthread.h
+-
+TCP_API.hpp
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/TCP_API.hpp
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/TCP_API.hpp
+

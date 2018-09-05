@@ -1,5 +1,6 @@
 /*----
-Contributor: Jérôme Dubois
+Author: Jérôme Dubois
+Contributors:
 Version: 1.1
 Date: 08/2018
 Descritption:
@@ -8,16 +9,6 @@ A C librairy create to manage server and client using socket via TCP protocol. T
 
 Initialy create to make a server on a RedPitaya defined as access point and receive the data on PC client. Server can handle multiple connection, and send the same data at each client.
 
-----*/
-
-#ifndef TCP_API_H
-#define TCP_API_H
-
-/*----
-A C librairy made by Jérôme Dubois to make server and client using TCP socket.
-This librairy can launch a server that can handle several clients. TCP function here can manage char or int16_t buffer send for server to client.
-
-This librairy was originally made to make a server on a RedPitaya configure as access point and to make client on PC to receive the data sent by it.
 ----*/
 
 #include<stdio.h> //for printf
@@ -31,62 +22,13 @@ This librairy was originally made to make a server on a RedPitaya configure as a
 #include<netdb.h> //for gethostbyname
 #include<pthread.h> //for thread
 
-#define INVALID_SOCKET -1
-#define SOCKET_ERROR -1
-#define closesocket(s) close(s)
+#include"TCP_API.hpp"
 
-extern float r0;
-extern float rf;
-extern int dec;
-extern int Nline;
-extern double sector;
-extern int mode_RP;
 pthread_t TCP_server_thread;
-
-typedef int SOCKET;
-typedef struct sockaddr_in SOCKADDR_IN;
-typedef struct sockaddr SOCKADDR;
-typedef struct in_addr IN_ADiDR;
-typedef struct client client; //structure that contained client informations
-typedef struct server_info server_info; //structure need to make thread with server routinr
-
-void init_struct_client(client* client_list,unsigned int Nmax); //initialise client structure
-void clear_struct_client(client* client_list); //free malloc on struct client
-void add_client(client* client_list, SOCKET sock_server); //TCP server is initialised it add new client informations in structure client
-void clear_client(client* client_list,unsigned int id); //clear client with id_client==id form structure client and reorganize the structure
-void init_TCP_client(SOCKET* sock, const char* IP, int Port); //initialise TCP client
-int int_converter(char x);
-void get_RP_settings(SOCKET *sock);
-void init_TCP_server(SOCKET* sock, int Port, client* client_list,unsigned int MaxClient); //initialise TCP server
-void *TCP_server_routine(void* p_data); //server routine function for thread, server turn in parallel to main
-void launch_server(SOCKET* sock, client* client_list); //function that launch the server in parallel to main
-void close_TCP_server(SOCKET* sock, client* client_list); //close client connexion and TCP server (for server)
-void close_TCP_client(SOCKET* sock); //close client connexion (for client)
-int send_TCP_server(client* client_list, char* buffer, int buff_length, int target); // send buffer of size buff_length to client with id target, if target<0 buffer is sent to all clients for server
-void send_TCP_client(SOCKET* sock, char* buffer, int buff_length); //send buffer of size buff_length to server for client
-int receive_TCP_server(client* client_list, char* buffer, int buff_length, int target); //receive buffer of size buff_length from client with id target for server
-int receive_TCP_client(SOCKET* sock, char* buffer, int buff_length); //receive buffer of size buff from server for client
-int send_int16_TCP_server(client* client_list, int16_t *buffer, int buff_length, int target); //same as send_TCP_server but the variable sent are coded on 2 bytes (16 bits int) instead only one use with receive_int16_TCP_client
-int receive_int16_TCP_client(SOCKET* sock, int16_t * buffer, int buff_length); //receive 16 bits buffer of size buff_length from server, use with send int16_TCP_server
-
-struct client
-{
-	unsigned int Nmax;
-	unsigned int NbClient;
-	unsigned int* id_client;
-	SOCKET* sock_client;
-	SOCKADDR_IN* sin_client;
-};
-
-struct server_info
-{
-	SOCKET sock;
-	client* client_list;
-};
 
 void init_struct_client(client* client_list, unsigned int Nmax)
 {
-	int i=0;
+	unsigned int i=0;
 	client_list->Nmax=Nmax;
 	client_list->NbClient=0;
 	client_list->sock_client=(SOCKET *)malloc(Nmax*sizeof(SOCKET));
@@ -109,10 +51,10 @@ void add_client(client* client_list, SOCKET sock_server)
 		//static unsigned int id=0;
 		int Nset=6;
 		char buffer[Nset];
-		
+
 		buffer[0]=(char)r0;
 		buffer[1]=(char)rf;
-		buffer[2]=(char)dec;
+		buffer[2]=(char)decimation;
 		buffer[3]=(char)Nline;
 		buffer[4]=(char)sector;
 		buffer[5]=(char)mode_RP;
@@ -132,14 +74,14 @@ void add_client(client* client_list, SOCKET sock_server)
 				client_list->NbClient+=1;
 				printf("Client number %i on %i, connected on socket = %i\n",client_list->NbClient,client_list->Nmax,client_list->sock_client[client_list->NbClient-1]);
 			}
-		}	
+		}
 		//else{printf("too many clients\n");}
 }
 
 void clear_client(client* client_list, unsigned int id)
 {
-	int i;
-	client client_temp={.NbClient=0, .Nmax=0, .sock_client=NULL, .sin_client=NULL, .id_client=NULL};
+	unsigned int i;
+	client client_temp;//{.NbClient=0, .Nmax=0, .sock_client=NULL, .sin_client=NULL, .id_client=NULL};
 	init_struct_client(&client_temp,client_list->Nmax);
 	if (client_list->NbClient>1)
 	{
@@ -180,8 +122,8 @@ void clear_client(client* client_list, unsigned int id)
 
 void init_TCP_client(SOCKET* sock, const char* IP, int Port)
 {
-	SOCKADDR_IN sclient={0};
-	
+	SOCKADDR_IN sclient;//={0};
+
 	//Create socket
 	(*sock)=socket(AF_INET, SOCK_STREAM, 0);
 	if ((*sock)==INVALID_SOCKET)
@@ -219,7 +161,7 @@ void get_RP_settings(SOCKET *sock)
 	receive_TCP_client(sock, tmp, Nset);
 	r0=(float)int_converter(tmp[0]);
 	rf=(float)int_converter(tmp[1]);
-	dec=int_converter(tmp[2]);
+	decimation=int_converter(tmp[2]);
 	Nline=int_converter(tmp[3]);
 	sector=(double)int_converter(tmp[4]);
 	mode_RP=int_converter(tmp[5]);
@@ -227,7 +169,7 @@ void get_RP_settings(SOCKET *sock)
 
 void init_TCP_server(SOCKET* sock, int Port,client* client_list, unsigned int MaxClient)
 {
-	SOCKADDR_IN server={0};
+	SOCKADDR_IN server;//={0};
 
 	//Create socket
 	(*sock)=socket(AF_INET, SOCK_STREAM,0);
@@ -262,13 +204,13 @@ void init_TCP_server(SOCKET* sock, int Port,client* client_list, unsigned int Ma
 
 void *TCP_server_routine(void* p_data)
 {
-	server_info* serv_info=p_data;
-	
+	/*server_info* serv_info=p_data;
+
 	while (1)
 	{
 		add_client(serv_info->client_list,serv_info->sock);
 		printf("client number %i connected\n",serv_info->client_list->NbClient);
-	}
+	}*/
 
 	return NULL;
 }
@@ -288,7 +230,7 @@ void launch_server(SOCKET* sock, client* client_list)
 
 void close_TCP_server(SOCKET* sock, client* client_list)
 {
-	int i=0;
+	unsigned int i=0;
 
 	pthread_cancel(TCP_server_thread);//close thread
 
@@ -304,7 +246,7 @@ void close_TCP_client(SOCKET* sock)
 
 int send_TCP_server(client* client_list, char* buffer, int buff_length, int target)
 {
-	int i=0;
+	unsigned int i=0;
 	int err=0;
 
 	//local variable to clear the client after sending, whereas due to reorganisation it bug if we don't clear the last client
@@ -375,7 +317,7 @@ int receive_TCP_client(SOCKET* sock, char* buffer, int buff_length)
 
 int send_int16_TCP_server(client* client_list, int16_t *buffer, int buff_length, int target)
 {
-	int i=0;
+	unsigned int i=0;
 	int err=0;
 
 	//local variable to clear the client after sending, whereas due to reorganisation it bug if we don't clear the last client
@@ -426,12 +368,21 @@ void send_int16_TCP_client(SOCKET* sock, int16_t *buffer, int buff_length)
 
 int receive_int16_TCP_client(SOCKET* sock, int16_t *buffer, int buff_length)
 {
+	//int iloop=0;
 	if (recv((*sock), (char *)buffer, 2*buff_length, MSG_WAITALL)==0)
 	{
 		printf("server closed\n");
 		return 1;
 	}
-	else {return 0;}
+	else
+	{
+		/*if (buff_length>1)
+		{
+			for (iloop=0 ; iloop<5 ; iloop++)
+			{
+				printf("line[%i] = %i\n", iloop, buffer[iloop]);
+			}
+		}*/
+		return 0;
+	}
 }
-
-#endif

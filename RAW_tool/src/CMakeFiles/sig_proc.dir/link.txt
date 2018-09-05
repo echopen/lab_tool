@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsig_proc.a  CMakeFiles/sig_proc.dir/sig_proc_float.cpp.o
+/usr/bin/ranlib libsig_proc.a

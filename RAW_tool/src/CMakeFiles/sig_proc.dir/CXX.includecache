@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/pointer_management.hpp
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/sig_proc_float.cpp
+math.h
+-
+complex.h
+-
+pointer_management.hpp
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/pointer_management.hpp
+sig_proc_float.hpp
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/sig_proc_float.hpp
+
+/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/sig_proc_float.hpp
+

@@ -1,13 +1,14 @@
 /*----
-Contributor: Jérôme Dubois
-Version: 1.0
-Date: 06/2018
+Author: Jérôme Dubois
+Contributors:
+Version: 1.1
+Date: 08/2018
 Descritption:
 A C librairy create to make scan conversion using
 linear or weight interpolation. Weight interpolation often use
 in acoustic imaging, but linear interpolation give better results.
 
-This librairy use structures to facilitate the use in C code. These structure
+This librairy use structures to facilitate the use in C code. These structures can
 be resize. Need the pointer_management.h librairy.
 
 Usage:
@@ -16,108 +17,19 @@ scan_conv scan_conv_struct;
 float **dataf=NULL;
 create_matrix_float(&dataf, Nline, Npoint);
 create_scan_conv_struct (&scan_conv_struct, Npoint, Nline, sector, r0, rf, nx, ny, 0); //initiate the structure and detemined the wieght matrix to make scan conversion
-image_scan_conversion (scan_conv_struct, dataf);
+image_scan_conversion (&scan_conv_struct, dataf);
 
 ----*/
-
-#ifndef SCAN_CONVERSION_H
-#define SCAN_CONVERSION_H
-
 #include<math.h>
 #include<stdio.h>
 #include<stdlib.h>
-#include"pointer_management.h"
+#include"pointer_management.hpp"
 
-#define PI 3.14159265358979323846
-
-typedef struct x_y_tensor x_y_tensor;
-typedef struct r_theta_tensor r_theta_tensor;
-typedef struct scan_conv scan_conv;
-
-void create_x_y_tensor (x_y_tensor *xyt, int Nxt, int Nyt);
-void fill_x_y_vector (scan_conv *scan_conv_struct);
-void resize_x_y_tensor (x_y_tensor *xyt, int Nxt, int Nyt);
-void clear_x_y_tensor (x_y_tensor *xyt);
-
-void create_r_theta_tensor (r_theta_tensor *rtt, float R0t, float Rft, int Nrt, int Nlt, int Nxt, int Nyt);
-void fill_r_theta_vectors (scan_conv *scan_conv_struct);
-void fill_r_theta_matrices (scan_conv *scan_conv_struct); //also fill matrix of x_y_tensor
-void resize_r_theta_tensor (r_theta_tensor *rtt, float R0t, float Rft, int Nrt, int Nlt, int Nxt, int Nyt);
-void clear_r_theta_tensor(r_theta_tensor *rtt);
-
-void create_image (scan_conv *scan_conv_struct, int Nxt, int Nyt);
-void resize_image (scan_conv *scan_conv_struct, int Nxnew, int Nynew, int Nxold, int Nyold);
-void delete_image (scan_conv *scan_conv_struct);
-
-void create_indicial_x_y_buffers (scan_conv *scan_conv_struct);
-void fill_indicial_x_y_buffers (scan_conv *scan_conv_struct);
-void resize_indicial_x_y_buffers (scan_conv *scan_conv_struct, int Nin_old, int Nout_old);
-void delete_indicial_x_y_buffers (scan_conv *scan_conv_struct);
-
-void create_indicial_weight_matrix(scan_conv *scan_conv_struct);
-void resize_indicial_weight_matrix(scan_conv *scan_conv_struct, int Nin_old);
-void delete_indicial_weight_matrix(scan_conv *scan_conv_struct);
-void indicial_matrix_calculation(scan_conv *scan_conv_struct);
-void weight_matrix_calculation(scan_conv *scan_conv_struct);
-
-void create_scan_conv_struct (scan_conv *scan_conv_struct, int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im, int option_selection);
-void resize_scan_conv_struct (scan_conv *scan_conv_struct, int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im, int option_selection);
-void delete_scan_conv_struct (scan_conv *scan_conv_struct);
-
-void image_scan_conversion (scan_conv *scan_conv_struct, float **image_r_theta);
-void change_image_background (scan_conv *scan_conv_struct, float background);
-
-//structure definition
-struct x_y_tensor
-{
-	int Nx; //number of point of the x vector
-	int Ny; //number of point of the y vector
-
-	float *x_vector;
-	float *y_vector;
-	int **indicial_x_y_tmp;
-	int **indicial_x_y_out_tmp;
-};
-
-struct r_theta_tensor
-{
-	float R0; //begin of measuring line
-	float Rf; //end of measuring line
-	int Nr;
-	int Nl;
-	int Nx;
-	int Ny;
-
-	float *r_vector;
-	float *theta_vector;
-	float **r_matrix;
-	float **theta_matrix;
-};
-
-struct scan_conv
-{
-	int N_point_to_change; //number of pixel to calcul
-	int N_out; //number of pixel outside the sector
-	int **indicial_x_y; //2*N_point_to_change matrix, indicial in the image of the N_point_to_changepixel that have to be calculated in the image
-	int **indicial_x_y_out; //2*N_point_to_change matrix, gather the indices of the point of the image out the imaging sector
-	int **indicial_r_theta; //size 4*N_point_to_change, indicial of the 4 points in the r theta plan that are used in the calculus of the Nth pixel, pixel listed in indicial_x_y
-	float **weight; //size 4*N_point_to_change, weight of the 4 points listed in indicial_r_theta for the calcul of the pixel listed in indicial_x_y
-	int Nr; //number of point per line from the probe
-	int Nline; //number of line per image from the probe
-	float sector; //sector of the image
-	int Nx; //number of pixel along x in the image
-	int Ny; //number of pixel along y in the image
-	float **image; //image
-	int option; //type of scan conversion, 0 linear interpolation, 1 weight/distance interpolation
-
-	x_y_tensor *cartesian_tensor;
-	r_theta_tensor *polar_tensor;
-};
+#include"scan_conversion_float.hpp"
 
 //x_y_tensor
 void create_x_y_tensor (x_y_tensor *xyt, int Nxt, int Nyt)
 {
-	int i=0;
 	xyt->Nx=Nxt;
 	xyt->Ny=Nyt;
 
@@ -184,8 +96,8 @@ void clear_x_y_tensor (x_y_tensor *xyt)
 {
 	delete_vector_float(&xyt->x_vector);
 	delete_vector_float(&xyt->y_vector);
-	delete_matrix_int(&xyt->indicial_x_y_tmp,2,xyt->Nx*xyt->Ny);
-	delete_matrix_int(&xyt->indicial_x_y_out_tmp,2,xyt->Nx*xyt->Ny);
+	delete_matrix_int(&xyt->indicial_x_y_tmp,2);
+	delete_matrix_int(&xyt->indicial_x_y_out_tmp,2);
 }
 
 //r_theta_tensor
@@ -223,8 +135,6 @@ void fill_r_theta_matrices (scan_conv *scan_conv_struct)
 {
   int i=0, j=0, N_tmp=0, N_out_tmp=0;
   float half_sec=scan_conv_struct->sector/2;
-  float ri=0.0;
-  float ti=0.0;
 
 	for (j=0 ; j<scan_conv_struct->Ny ; j++)
 	{
@@ -270,24 +180,24 @@ void clear_r_theta_tensor(r_theta_tensor *rtt)
 {
 	delete_vector_float(&rtt->r_vector);
 	delete_vector_float(&rtt->theta_vector);
-	delete_matrix_float(&rtt->r_matrix,rtt->Nx,rtt->Ny);
-	delete_matrix_float(&rtt->theta_matrix,rtt->Nx,rtt->Ny);
+	delete_matrix_float(&rtt->r_matrix,rtt->Nx);
+	delete_matrix_float(&rtt->theta_matrix,rtt->Nx);
 }
 
 //image management
 void create_image (scan_conv *scan_conv_struct, int Nxt, int Nyt)
 {
-	create_matrix_float(&scan_conv_struct->image, Nxt, Nyt);
+	create_matrix_int(&scan_conv_struct->image, Nxt, Nyt);
 }
 
 void resize_image (scan_conv *scan_conv_struct, int Nxnew, int Nynew, int Nxold, int Nyold)
 {
-	resize_matrix_float(&scan_conv_struct->image, Nxnew, Nynew, Nxold, Nyold);
+	resize_matrix_int(&scan_conv_struct->image, Nxnew, Nynew, Nxold, Nyold);
 }
 
 void delete_image (scan_conv *scan_conv_struct)
 {
-	delete_matrix_float(&scan_conv_struct->image,scan_conv_struct->Nx,scan_conv_struct->Ny);
+	delete_matrix_int(&scan_conv_struct->image,scan_conv_struct->Nx);
 }
 
 
@@ -343,8 +253,8 @@ void resize_indicial_x_y_buffers (scan_conv *scan_conv_struct, int Nin_old, int 
 
 void delete_indicial_x_y_buffers (scan_conv *scan_conv_struct)
 {
-	delete_matrix_int(&scan_conv_struct->indicial_x_y, 2, scan_conv_struct->N_point_to_change);
-  delete_matrix_int(&scan_conv_struct->indicial_x_y_out, 2, scan_conv_struct->N_out);
+	delete_matrix_int(&scan_conv_struct->indicial_x_y, 2);
+  delete_matrix_int(&scan_conv_struct->indicial_x_y_out, 2);
 }
 
 void create_indicial_weight_matrix(scan_conv *scan_conv_struct)
@@ -361,8 +271,8 @@ void resize_indicial_weight_matrix(scan_conv *scan_conv_struct, int Nin_old)
 
 void delete_indicial_weight_matrix(scan_conv *scan_conv_struct)
 {
-  delete_matrix_int(&scan_conv_struct->indicial_r_theta, 4, scan_conv_struct->N_point_to_change);
-  delete_matrix_float(&scan_conv_struct->weight, 4, scan_conv_struct->N_point_to_change);
+  delete_matrix_int(&scan_conv_struct->indicial_r_theta, 4);
+  delete_matrix_float(&scan_conv_struct->weight, 4);
 }
 
 void indicial_matrix_calculation(scan_conv *scan_conv_struct)
@@ -460,7 +370,7 @@ void weight_matrix_calculation(scan_conv *scan_conv_struct)
 void create_scan_conv_struct (scan_conv *scan_conv_struct, int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im, int option_selection)
 {
   //init attribuite of the structure
-	sector_probe=sector_probe*PI/180.0;
+	sector_probe=sector_probe*PIf/180.0;
 	scan_conv_struct->cartesian_tensor=(x_y_tensor *)malloc(sizeof(x_y_tensor));
 	scan_conv_struct->polar_tensor=(r_theta_tensor *)malloc(sizeof(r_theta_tensor));
 	scan_conv_struct->Nr=Nr_probe;
@@ -486,24 +396,25 @@ void create_scan_conv_struct (scan_conv *scan_conv_struct, int Nr_probe, int Nli
   //clear all temporary buffer
   clear_x_y_tensor(scan_conv_struct->cartesian_tensor);
   clear_r_theta_tensor(scan_conv_struct->polar_tensor);
+	printf("scan conv struct initiated\n");
 }
 
 void resize_scan_conv_struct (scan_conv *scan_conv_struct, int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im, int option_selection)
 {
   //take old value for resizing attribuite of the structure
-	sector_probe=sector_probe*PI/180.0;
-  int Nr_old, Nline_old, Nx_old, Ny_old, option_old, Nin_old, Nout_old;
-  float sector_old, R0_old, Rf_old;
-  Nr_old=scan_conv_struct->Nr;
+	sector_probe=sector_probe*PIf/180.0;
+  int Nx_old, Ny_old, Nin_old, Nout_old;//, option_old, Nr_old, Nline_old;
+  //float sector_old, R0_old, Rf_old;
+	Nx_old=scan_conv_struct->Nx;
+	Ny_old=scan_conv_struct->Ny;
+  Nin_old=scan_conv_struct->N_point_to_change;
+  Nout_old=scan_conv_struct->N_out;
+  /*Nr_old=scan_conv_struct->Nr;
 	Nline_old=scan_conv_struct->Nline;
 	sector_old=scan_conv_struct->sector;
   R0_old=scan_conv_struct->polar_tensor->R0;
   Rf_old=scan_conv_struct->polar_tensor->Rf;
-	Nx_old=scan_conv_struct->Nx;
-	Ny_old=scan_conv_struct->Ny;
-	option_old=scan_conv_struct->option;
-  Nin_old=scan_conv_struct->N_point_to_change;
-  Nout_old=scan_conv_struct->N_out;
+	option_old=scan_conv_struct->option;*/
 
 	scan_conv_struct->Nr=Nr_probe;
 	scan_conv_struct->Nline=Nline_probe;
@@ -542,10 +453,15 @@ void delete_scan_conv_struct (scan_conv *scan_conv_struct)
 
 void image_scan_conversion (scan_conv *scan_conv_struct, float **image_r_theta)
 {
-  int i=0, k=0, l=0;
+  int i=0;
+	float P1=0.0, P2=0.0, P3=0.0, P4=0.0;
   for (i=0 ; i<scan_conv_struct->N_point_to_change ; i++)
   {
-    scan_conv_struct->image[scan_conv_struct->indicial_x_y[0][i]][scan_conv_struct->indicial_x_y[1][i]]=(scan_conv_struct->weight[0][i]*image_r_theta[scan_conv_struct->indicial_r_theta[2][i]][scan_conv_struct->indicial_r_theta[0][i]]+scan_conv_struct->weight[1][i]*image_r_theta[scan_conv_struct->indicial_r_theta[3][i]][scan_conv_struct->indicial_r_theta[0][i]]+scan_conv_struct->weight[2][i]*image_r_theta[scan_conv_struct->indicial_r_theta[2][i]][scan_conv_struct->indicial_r_theta[1][i]]+scan_conv_struct->weight[3][i]*image_r_theta[scan_conv_struct->indicial_r_theta[3][i]][scan_conv_struct->indicial_r_theta[1][i]]);
+		P1=scan_conv_struct->weight[0][i]*image_r_theta[scan_conv_struct->indicial_r_theta[2][i]][scan_conv_struct->indicial_r_theta[0][i]];
+		P2=scan_conv_struct->weight[1][i]*image_r_theta[scan_conv_struct->indicial_r_theta[3][i]][scan_conv_struct->indicial_r_theta[0][i]];
+		P3=scan_conv_struct->weight[2][i]*image_r_theta[scan_conv_struct->indicial_r_theta[2][i]][scan_conv_struct->indicial_r_theta[1][i]];
+		P4=scan_conv_struct->weight[3][i]*image_r_theta[scan_conv_struct->indicial_r_theta[3][i]][scan_conv_struct->indicial_r_theta[1][i]];
+    scan_conv_struct->image[scan_conv_struct->indicial_x_y[0][i]][scan_conv_struct->indicial_x_y[1][i]]=(int)(P1+P2+P3+P4);
   }
 }
 
@@ -557,5 +473,3 @@ void change_image_background (scan_conv *scan_conv_struct, float background)
 		scan_conv_struct->image[scan_conv_struct->indicial_x_y_out[0][i]][scan_conv_struct->indicial_x_y_out[1][i]]=background;
 	}
 }
-
-#endif
