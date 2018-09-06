@@ -48,18 +48,18 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/jerome/Github/C_Cpp/Github/training/RAW_tool4
+CMAKE_SOURCE_DIR = /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jerome/Github/C_Cpp/Github/training/RAW_tool4
+CMAKE_BINARY_DIR = /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,14 +80,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(CMAKE_COMMAND) -E cmake_progress_start /home/jerome/Github/C_Cpp/Github/training/RAW_tool4/CMakeFiles /home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src/CMakeFiles/progress.marks
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jerome/Github/C_Cpp/Github/training/RAW_tool4/CMakeFiles 0
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(CMAKE_COMMAND) -E cmake_progress_start /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool/CMakeFiles /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool/src/CMakeFiles/progress.marks
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/methods.dir/rule:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/methods.dir/rule
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/methods.dir/rule
 .PHONY : src/CMakeFiles/methods.dir/rule
 
 # Convenience name for target.
@@ -122,12 +122,12 @@ methods: src/CMakeFiles/methods.dir/rule
 
 # fast build rule for target.
 methods/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/build
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/build
 .PHONY : methods/fast
 
 # Convenience name for target.
 src/CMakeFiles/pointer_management.dir/rule:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/pointer_management.dir/rule
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/pointer_management.dir/rule
 .PHONY : src/CMakeFiles/pointer_management.dir/rule
 
 # Convenience name for target.
@@ -137,12 +137,12 @@ pointer_management: src/CMakeFiles/pointer_management.dir/rule
 
 # fast build rule for target.
 pointer_management/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/build
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/build
 .PHONY : pointer_management/fast
 
 # Convenience name for target.
 src/CMakeFiles/scan_conv.dir/rule:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/scan_conv.dir/rule
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/scan_conv.dir/rule
 .PHONY : src/CMakeFiles/scan_conv.dir/rule
 
 # Convenience name for target.
@@ -152,12 +152,12 @@ scan_conv: src/CMakeFiles/scan_conv.dir/rule
 
 # fast build rule for target.
 scan_conv/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/build
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/build
 .PHONY : scan_conv/fast
 
 # Convenience name for target.
 src/CMakeFiles/sig_proc.dir/rule:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/sig_proc.dir/rule
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/sig_proc.dir/rule
 .PHONY : src/CMakeFiles/sig_proc.dir/rule
 
 # Convenience name for target.
@@ -167,12 +167,12 @@ sig_proc: src/CMakeFiles/sig_proc.dir/rule
 
 # fast build rule for target.
 sig_proc/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/build
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/build
 .PHONY : sig_proc/fast
 
 # Convenience name for target.
 src/CMakeFiles/TCP.dir/rule:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/TCP.dir/rule
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/TCP.dir/rule
 .PHONY : src/CMakeFiles/TCP.dir/rule
 
 # Convenience name for target.
@@ -182,7 +182,7 @@ TCP: src/CMakeFiles/TCP.dir/rule
 
 # fast build rule for target.
 TCP/fast:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/build
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/build
 .PHONY : TCP/fast
 
 TCP_API.o: TCP_API.cpp.o
@@ -191,7 +191,7 @@ TCP_API.o: TCP_API.cpp.o
 
 # target to build an object file
 TCP_API.cpp.o:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.o
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.o
 .PHONY : TCP_API.cpp.o
 
 TCP_API.i: TCP_API.cpp.i
@@ -200,7 +200,7 @@ TCP_API.i: TCP_API.cpp.i
 
 # target to preprocess a source file
 TCP_API.cpp.i:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.i
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.i
 .PHONY : TCP_API.cpp.i
 
 TCP_API.s: TCP_API.cpp.s
@@ -209,7 +209,7 @@ TCP_API.s: TCP_API.cpp.s
 
 # target to generate assembly for a file
 TCP_API.cpp.s:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.s
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/TCP.dir/build.make src/CMakeFiles/TCP.dir/TCP_API.cpp.s
 .PHONY : TCP_API.cpp.s
 
 methods.o: methods.cpp.o
@@ -218,7 +218,7 @@ methods.o: methods.cpp.o
 
 # target to build an object file
 methods.cpp.o:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.o
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.o
 .PHONY : methods.cpp.o
 
 methods.i: methods.cpp.i
@@ -227,7 +227,7 @@ methods.i: methods.cpp.i
 
 # target to preprocess a source file
 methods.cpp.i:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.i
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.i
 .PHONY : methods.cpp.i
 
 methods.s: methods.cpp.s
@@ -236,7 +236,7 @@ methods.s: methods.cpp.s
 
 # target to generate assembly for a file
 methods.cpp.s:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.s
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/methods.dir/build.make src/CMakeFiles/methods.dir/methods.cpp.s
 .PHONY : methods.cpp.s
 
 pointer_management.o: pointer_management.cpp.o
@@ -245,7 +245,7 @@ pointer_management.o: pointer_management.cpp.o
 
 # target to build an object file
 pointer_management.cpp.o:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.o
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.o
 .PHONY : pointer_management.cpp.o
 
 pointer_management.i: pointer_management.cpp.i
@@ -254,7 +254,7 @@ pointer_management.i: pointer_management.cpp.i
 
 # target to preprocess a source file
 pointer_management.cpp.i:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.i
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.i
 .PHONY : pointer_management.cpp.i
 
 pointer_management.s: pointer_management.cpp.s
@@ -263,7 +263,7 @@ pointer_management.s: pointer_management.cpp.s
 
 # target to generate assembly for a file
 pointer_management.cpp.s:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.s
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/pointer_management.dir/build.make src/CMakeFiles/pointer_management.dir/pointer_management.cpp.s
 .PHONY : pointer_management.cpp.s
 
 scan_conversion_float.o: scan_conversion_float.cpp.o
@@ -272,7 +272,7 @@ scan_conversion_float.o: scan_conversion_float.cpp.o
 
 # target to build an object file
 scan_conversion_float.cpp.o:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.o
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.o
 .PHONY : scan_conversion_float.cpp.o
 
 scan_conversion_float.i: scan_conversion_float.cpp.i
@@ -281,7 +281,7 @@ scan_conversion_float.i: scan_conversion_float.cpp.i
 
 # target to preprocess a source file
 scan_conversion_float.cpp.i:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.i
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.i
 .PHONY : scan_conversion_float.cpp.i
 
 scan_conversion_float.s: scan_conversion_float.cpp.s
@@ -290,7 +290,7 @@ scan_conversion_float.s: scan_conversion_float.cpp.s
 
 # target to generate assembly for a file
 scan_conversion_float.cpp.s:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.s
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/scan_conv.dir/build.make src/CMakeFiles/scan_conv.dir/scan_conversion_float.cpp.s
 .PHONY : scan_conversion_float.cpp.s
 
 sig_proc_float.o: sig_proc_float.cpp.o
@@ -299,7 +299,7 @@ sig_proc_float.o: sig_proc_float.cpp.o
 
 # target to build an object file
 sig_proc_float.cpp.o:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.o
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.o
 .PHONY : sig_proc_float.cpp.o
 
 sig_proc_float.i: sig_proc_float.cpp.i
@@ -308,7 +308,7 @@ sig_proc_float.i: sig_proc_float.cpp.i
 
 # target to preprocess a source file
 sig_proc_float.cpp.i:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.i
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.i
 .PHONY : sig_proc_float.cpp.i
 
 sig_proc_float.s: sig_proc_float.cpp.s
@@ -317,7 +317,7 @@ sig_proc_float.s: sig_proc_float.cpp.s
 
 # target to generate assembly for a file
 sig_proc_float.cpp.s:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.s
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(MAKE) -f src/CMakeFiles/sig_proc.dir/build.make src/CMakeFiles/sig_proc.dir/sig_proc_float.cpp.s
 .PHONY : sig_proc_float.cpp.s
 
 # Help Target
@@ -359,6 +359,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jerome/Github/C_Cpp/Github/training/RAW_tool4 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

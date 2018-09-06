@@ -1,4 +1,4 @@
-# Install script for directory: /home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src
+# Install script for directory: /home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

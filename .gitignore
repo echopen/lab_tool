@@ -1,4 +1,4 @@
-# Prerequisites
+l# Prerequisites
 *.d
 
 # Compiled Object files
@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+ 
+#CMake generated files 
+/RAW_tool/CMakeCache.txt
+/RAW_tool/CMakeFiles
+/RAW_tool/Makefile
+/RAW_tool/RAW_tool 
+/RAW_tool/cmake_install.cmake
+

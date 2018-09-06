@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/RAW_tool.dir/RAW_tool.cpp.o  -o RAW_tool -rdynamic src/libpointer_management.a src/libscan_conv.a src/libsig_proc.a src/libTCP.a src/libmethods.a -lpthread src/libpointer_management.a src/libscan_conv.a src/libsig_proc.a 

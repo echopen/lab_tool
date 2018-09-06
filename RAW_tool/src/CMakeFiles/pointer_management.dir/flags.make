@@ -6,5 +6,5 @@ CXX_FLAGS =   -g -lpthread -lm -g -lm -lpthread -std=c++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/jerome/Github/C_Cpp/Github/training/RAW_tool4/src 
+CXX_INCLUDES = -I/home/lecoucl/Projects/EchOpen/lab_tool/RAW_tool/src 
 
