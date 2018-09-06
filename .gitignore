@@ -1,4 +1,4 @@
-l# Prerequisites
+# Prerequisites
 *.d
 
 # Compiled Object files
@@ -32,9 +32,14 @@ l# Prerequisites
 *.app
  
 #CMake generated files 
-/RAW_tool/CMakeCache.txt
-/RAW_tool/CMakeFiles
-/RAW_tool/Makefile
-/RAW_tool/RAW_tool 
-/RAW_tool/cmake_install.cmake
+**/CMakeCache.txt
+**/CMakeFiles
+**/Makefile
+**/RAW_tool 
+**/cmake_install.cmake
 
+#swap vim files
+*.sw[a-p]
+
+#probe emulator binary file
+**/probe_emulator
